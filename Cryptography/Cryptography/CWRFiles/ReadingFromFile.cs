@@ -9,16 +9,23 @@ namespace Cryptography.ReadingWriteingInFile
 {
     static class ReadingFromFile
     {
-        public static string readFromFile(string name)
+        public static List<string> readFromFile(string name)
         {
             string path = @"..\..\..\Keys\"+name+".txt";
+            string line = "";
+            List<string> text = new List<string>();
             try
             {
                 using (StreamReader reader = new StreamReader(path))
                 {
-                    string text = reader.ReadToEnd();
-                    return text;
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        
+                        text.Add(line);
+                    }
+                    
                 }
+                return text;
             }
             catch (Exception e)
             {

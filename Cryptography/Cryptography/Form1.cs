@@ -23,8 +23,13 @@ namespace Cryptography
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string text = ReadingWriteingInFile.ReadingFromFile.readFromFile("test");
-            MessageBox.Show(text);
+            List<string> text = ReadingWriteingInFile.ReadingFromFile.readFromFile("test");
+          
+            foreach (var item in text)
+            {
+                textBox1.AppendText(item + Environment.NewLine);
+                
+            }
         }
         public string decrypt2()
         {
