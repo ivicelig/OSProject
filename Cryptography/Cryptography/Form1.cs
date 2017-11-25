@@ -23,13 +23,11 @@ namespace Cryptography
 
         private void button1_Click(object sender, EventArgs e)
         {
-            List<string> text = ReadingWriteingInFile.ReadingFromFile.readFromFile("test");
-          
-            foreach (var item in text)
-            {
-                textBox1.AppendText(item + Environment.NewLine);
-                
-            }
+            RSA.Encrypting a = new RSA.Encrypting();
+            string ab = "Hello";
+            
+
+            a.Encrypt(Encoding.ASCII.GetBytes(ab));
         }
         public string decrypt2()
         {
