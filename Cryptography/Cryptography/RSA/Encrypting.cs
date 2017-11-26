@@ -18,9 +18,9 @@ namespace Cryptography.RSA
         RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(1024);
         public byte[] Encrypt(byte[] clearText)
         {
-            if (ReadWrite.DoesFileExist(@"..\..\..\Files\public_key.xml") && ReadWrite.DoesFileExist(@"..\..\..\Files\private_key.xml"))
+            if (ReadWrite.DoesFileExist(@"..\..\..\Files\public_key.xml") && ReadWrite.DoesFileExist(@"..\..\..\Files\private_keyRSA.xml"))
             {
-                TextReader textReader = new StreamReader(@"..\..\..\Files\public_key.xml");
+                TextReader textReader = new StreamReader(@"..\..\..\Files\public_keyRSA.xml");
 
                 string readXMLString = textReader.ReadToEnd();
                 textReader.Close();
@@ -32,21 +32,24 @@ namespace Cryptography.RSA
             else
             {
 
-                TextWriter textWriter = new StreamWriter(@"..\..\..\Files\public_key.xml");
+                TextWriter textWriter = new StreamWriter(@"..\..\..\Files\public_keyRSA.xml");
                 string publicKey = rsa.ToXmlString(false);
                 textWriter.Write(publicKey);
                 textWriter.Close();
-                textWriter = new StreamWriter(@"..\..\..\Files\private_key.xml");
+                textWriter = new StreamWriter(@"..\..\..\Files\private_keyRSAy.xml");
                 string privateKey = rsa.ToXmlString(true);
                 textWriter.Write(privateKey);
                 textWriter.Close();
 
-                MessageBox.Show(publicKey);
+                byte[] encryptedText = rsa.Encrypt(clearText, false);
+                CFiles.CreateFile("encrypted_Text");
+                string encryptedTextInString = System.Convert.ToBase64String(encryptedText);
+                ReadWrite.WriteToFile(encryptedTextInString, "encrypted_Text");
+                return encryptedText;
                 
 
 
-                return null;
-            
+                
             }
 
            

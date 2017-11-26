@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.IO;
 namespace Cryptography.CWRFiles
 {
-    static class ReadWrite
+    public static class ReadWrite
     {
-        static public bool DoesFileExist(string filePath)
+        public static bool DoesFileExist(string filePath)
         {
             if (!File.Exists(filePath))
             {
@@ -17,6 +17,16 @@ namespace Cryptography.CWRFiles
             return true;
         }
 
+        public static void WriteToFile(string text, string filename)
+        {
+            string path = @"..\..\..\Files\"+filename+".txt";
+            using (StreamWriter sw = new StreamWriter(path))
+            {
+                sw.WriteLine(text);
+            }
+
+        }
+        
 
     }
 }
