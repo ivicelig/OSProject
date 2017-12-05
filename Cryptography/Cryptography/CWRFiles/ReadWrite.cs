@@ -26,6 +26,19 @@ namespace Cryptography.CWRFiles
             }
 
         }
+
+        public static string ReadFromFile(string fileName)
+        {
+            string path = @"..\..\..\Files\" + fileName + ".txt";
+            if (DoesFileExist(path))
+            {
+                StreamReader reader = new StreamReader(path);
+                string text = reader.ReadToEnd();
+                reader.Close();
+                return text;
+            }
+            return null;
+        }
         
 
     }

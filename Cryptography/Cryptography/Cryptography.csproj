@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AES\Decryption.cs" />
+    <Compile Include="AES\Encryption.cs" />
     <Compile Include="CWRFiles\CFiles.cs" />
     <Compile Include="CWRFiles\ReadWrite.cs" />
     <Compile Include="Form1.cs">
@@ -56,7 +58,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RSA\Decrypting.cs" />
     <Compile Include="RSA\Encrypting.cs" />
+    <Compile Include="Signature\Hash.cs" />
+    <Compile Include="Signature\Signature.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -82,6 +87,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
