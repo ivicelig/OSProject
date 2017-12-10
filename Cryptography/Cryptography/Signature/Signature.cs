@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Cryptography.Signature
 {
-    class Signature
+    public class Signature
     {
         public RSAPKCS1SignatureFormatter signatureFormatter;
         public RSAPKCS1SignatureDeformatter signatureDeformatter;

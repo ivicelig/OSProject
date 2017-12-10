@@ -64,14 +64,16 @@ namespace Cryptography.RSA
             {
                 MessageBox.Show("Lenght of string is to large.");
                 return new byte[0];
+                
             }
             catch (Exception)
             {
                 MessageBox.Show("Generic error!");
                 return new byte[0];
             }
+
            
-           
+            
                 
          }
 
