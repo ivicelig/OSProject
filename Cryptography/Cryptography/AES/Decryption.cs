@@ -7,19 +7,20 @@ namespace Cryptography.AES
     static public class Decryption
     {
         
-            static public string Decrypt(byte[] cryptedText, byte[] IV)
+            static public string Decrypt(byte[] cryptedText)
         {
 
             string plainText = null;
 
             using (RijndaelManaged rijAlg = new RijndaelManaged())
             {
+                string stringIV = CWRFiles.ReadWrite.ReadFromFile("AES_IV");
+                byte[] IVInByteArray = System.Convert.FromBase64String(stringIV);
 
-                
                 string key = CWRFiles.ReadWrite.ReadFromFile("AES_Key");
                 byte[] keyInByteArray = System.Convert.FromBase64String(key);
                 rijAlg.Key = keyInByteArray;
-                rijAlg.IV = IV;
+                rijAlg.IV =IVInByteArray;
                 rijAlg.Padding = PaddingMode.Zeros;
 
 

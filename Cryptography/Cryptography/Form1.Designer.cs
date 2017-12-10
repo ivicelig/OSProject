@@ -212,7 +212,7 @@
             // 
             // btnDecryptAES
             // 
-            this.btnDecryptAES.Location = new System.Drawing.Point(789, 103);
+            this.btnDecryptAES.Location = new System.Drawing.Point(749, 87);
             this.btnDecryptAES.Name = "btnDecryptAES";
             this.btnDecryptAES.Size = new System.Drawing.Size(75, 27);
             this.btnDecryptAES.TabIndex = 17;
@@ -222,7 +222,7 @@
             // 
             // btnEncryptAES
             // 
-            this.btnEncryptAES.Location = new System.Drawing.Point(789, 72);
+            this.btnEncryptAES.Location = new System.Drawing.Point(749, 56);
             this.btnEncryptAES.Name = "btnEncryptAES";
             this.btnEncryptAES.Size = new System.Drawing.Size(75, 25);
             this.btnEncryptAES.TabIndex = 16;
@@ -232,7 +232,7 @@
             // 
             // btnLoadTextAES
             // 
-            this.btnLoadTextAES.Location = new System.Drawing.Point(789, 42);
+            this.btnLoadTextAES.Location = new System.Drawing.Point(749, 26);
             this.btnLoadTextAES.Name = "btnLoadTextAES";
             this.btnLoadTextAES.Size = new System.Drawing.Size(75, 24);
             this.btnLoadTextAES.TabIndex = 15;
@@ -242,7 +242,7 @@
             // 
             // txtDecryptedAES
             // 
-            this.txtDecryptedAES.Location = new System.Drawing.Point(46, 248);
+            this.txtDecryptedAES.Location = new System.Drawing.Point(6, 232);
             this.txtDecryptedAES.Multiline = true;
             this.txtDecryptedAES.Name = "txtDecryptedAES";
             this.txtDecryptedAES.Size = new System.Drawing.Size(293, 171);
@@ -251,7 +251,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(43, 227);
+            this.label4.Location = new System.Drawing.Point(3, 211);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(99, 17);
             this.label4.TabIndex = 13;
@@ -259,7 +259,7 @@
             // 
             // txtEncryptedAES
             // 
-            this.txtEncryptedAES.Location = new System.Drawing.Point(416, 42);
+            this.txtEncryptedAES.Location = new System.Drawing.Point(376, 26);
             this.txtEncryptedAES.Multiline = true;
             this.txtEncryptedAES.Name = "txtEncryptedAES";
             this.txtEncryptedAES.Size = new System.Drawing.Size(293, 171);
@@ -268,7 +268,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(413, 21);
+            this.label5.Location = new System.Drawing.Point(373, 5);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(98, 17);
             this.label5.TabIndex = 11;
@@ -276,7 +276,7 @@
             // 
             // txtPlain
             // 
-            this.txtPlain.Location = new System.Drawing.Point(46, 42);
+            this.txtPlain.Location = new System.Drawing.Point(6, 26);
             this.txtPlain.Multiline = true;
             this.txtPlain.Name = "txtPlain";
             this.txtPlain.Size = new System.Drawing.Size(293, 171);
@@ -285,7 +285,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(43, 21);
+            this.label6.Location = new System.Drawing.Point(3, 5);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(65, 17);
             this.label6.TabIndex = 9;

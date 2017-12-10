@@ -16,6 +16,7 @@ namespace Cryptography.RSA
         
         static public byte[] decrypting(byte[] cryptedText)
         {
+            
                 RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(1024);
                 TextReader reader = new StreamReader(@"..\..\..\Files\private_keyRSA.txt");
                 string privateKey = reader.ReadToEnd();

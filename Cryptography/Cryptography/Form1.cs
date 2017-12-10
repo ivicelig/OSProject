@@ -20,29 +20,15 @@ namespace Cryptography
         public Form1()
         {
             InitializeComponent();
-            aes.GenerateIV();
+            
 
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            /*
-            RSA.Encrypting a = new RSA.Encrypting();
-            string ab = "Hello";
-            
-
-            byte[]abc = a.Encrypt(Encoding.ASCII.GetBytes(ab));
-            RSA.Decrypting b = new RSA.Decrypting();
-            byte[] decrypt = b.decrypting(abc);
-            
-            string decryptedTextInString = System.Text.Encoding.UTF8.GetString(decrypt);
-            MessageBox.Show(decryptedTextInString);
-            */
-            
-            
-
-
+           
+           
 
         }
 
@@ -104,17 +90,21 @@ namespace Cryptography
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            if (txtEncryptedText.Text.Length == 0)
+            
+                string encryptedText = CWRFiles.ReadWrite.ReadFromFile("encrypted_Text_RSA");
+            if (encryptedText != null)
             {
-                MessageBox.Show("Ne postoji sadržaj za dekriptiranje!");
+                byte[] stringToDecrypt = System.Convert.FromBase64String(encryptedText);
+                byte[] decryptedBytes = RSA.Decrypting.decrypting(stringToDecrypt);
+                txtDecryptedText.Text = System.Text.Encoding.UTF8.GetString(decryptedBytes);
             }
             else
             {
-                byte[] stringToDecrypt = System.Convert.FromBase64String(txtEncryptedText.Text);
-                byte[] decryptedBytes = RSA.Decrypting.decrypting(stringToDecrypt);
-                txtDecryptedText.Text = System.Text.Encoding.UTF8.GetString(decryptedBytes);
-
+                txtDecryptedText.Text = String.Empty;
             }
+                
+
+            
         }
 
         private void tabPage2_Click(object sender, EventArgs e)
@@ -152,11 +142,12 @@ namespace Cryptography
             else
             {
                 
-                byte[] encryptedAESText = AES.Encryption.Encrypt(txtPlain.Text, aes.IV);
+                byte[] encryptedAESText = AES.Encryption.Encrypt(txtPlain.Text);
+                byte[] IV = System.Convert.FromBase64String(CWRFiles.ReadWrite.ReadFromFile("AES_IV"));
                 MessageBox.Show(System.Convert.ToBase64String(encryptedAESText));
                 txtEncryptedAES.Text = System.Convert.ToBase64String(encryptedAESText);
                 CWRFiles.CFiles.CreateFile("AES_Encrypted");
-                CWRFiles.ReadWrite.WriteToFile(System.Convert.ToBase64String(encryptedAESText), "Aes_Encrypted");
+                CWRFiles.ReadWrite.WriteToFile(System.Convert.ToBase64String(encryptedAESText), "AES_Encrypted");
 
                 
 
@@ -165,17 +156,20 @@ namespace Cryptography
 
         private void btnDecryptAES_Click(object sender, EventArgs e)
         {
-            if (txtEncryptedAES.Text.Length == 0)
+
+            string encryptedText = CWRFiles.ReadWrite.ReadFromFile("AES_Encrypted");
+            if (encryptedText != null)
             {
-                MessageBox.Show("Ne postoji sadržaj za dekriptiranje!");
+                byte[] IV = System.Convert.FromBase64String(CWRFiles.ReadWrite.ReadFromFile("AES_IV"));
+                byte[] base64ByteToDecrypt = System.Convert.FromBase64String(encryptedText);
+                string decrypted = AES.Decryption.Decrypt(base64ByteToDecrypt);
+                txtDecryptedAES.Text = decrypted;
             }
             else
             {
-                byte[] base64ByteToDecrypt = System.Convert.FromBase64String(txtEncryptedAES.Text);
-                string decrypted = AES.Decryption.Decrypt(base64ByteToDecrypt, aes.IV);
-                txtDecryptedAES.Text = decrypted;
-;
+                txtDecryptedAES.Text = String.Empty;
             }
+            
         }
 
         private void btnSignature_Click(object sender, EventArgs e)
@@ -207,7 +201,12 @@ namespace Cryptography
             string privateKey = CWRFiles.ReadWrite.ReadFromFile("private_keyRSA");
             rsa.FromXmlString(privateKey);
             Signature.Signature signature = new Signature.Signature(rsa);
-            string Hash = CWRFiles.ReadWrite.ReadFromFile("hash");
+            string message = CWRFiles.ReadWrite.ReadFromFile("plain_text");
+            byte[] messagetoByte = System.Text.Encoding.UTF8.GetBytes(message);
+            byte[] hashValue = Signature.Hash.ComputeHashForMessage(messagetoByte);
+            string Hash = System.Convert.ToBase64String(hashValue);
+
+            
             string signatureFromFile = CWRFiles.ReadWrite.ReadFromFile("signature");
             byte[] byteHash = System.Convert.FromBase64String(Hash);
             byte[] byteSignature = System.Convert.FromBase64String(signatureFromFile);

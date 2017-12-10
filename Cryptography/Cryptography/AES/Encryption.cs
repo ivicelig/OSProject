@@ -6,7 +6,7 @@ namespace Cryptography.AES
 {
     static public class Encryption
     {
-        static public byte[] Encrypt(string plainText, byte[] IV)
+        static public byte[] Encrypt(string plainText)
         {
             
             byte[] encrypted;
@@ -22,12 +22,19 @@ namespace Cryptography.AES
                     string zapis = System.Convert.ToBase64String(secretKey);
                     CWRFiles.CFiles.CreateFile("AES_Key");
                     CWRFiles.ReadWrite.WriteToFile(zapis, "AES_Key");
+                    rijAlg.GenerateIV();
+                    CWRFiles.CFiles.CreateFile("AES_IV");
+                    string stringIV = System.Convert.ToBase64String(rijAlg.IV);
+                    CWRFiles.ReadWrite.WriteToFile(stringIV, "AES_IV");
 
                 }
+                string stringIV1 = CWRFiles.ReadWrite.ReadFromFile("AES_IV");
+                byte[] IVInByteArray = System.Convert.FromBase64String(stringIV1);
+
                 string key = CWRFiles.ReadWrite.ReadFromFile("AES_Key");
                 byte[] keyInByteArray = System.Convert.FromBase64String(key);
                 rijAlg.Key = keyInByteArray;
-                rijAlg.IV = IV;
+                rijAlg.IV = IVInByteArray;
                 rijAlg.Padding = PaddingMode.Zeros;
 
 
