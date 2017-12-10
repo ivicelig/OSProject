@@ -20,6 +20,10 @@ namespace Cryptography
         public Form1()
         {
             InitializeComponent();
+            if (!CWRFiles.ReadWrite.DoesFileExist("plain_text"))
+            {
+                CWRFiles.CFiles.CreateFile("plain_text");
+            }
             
 
 
@@ -144,7 +148,7 @@ namespace Cryptography
                 
                 byte[] encryptedAESText = AES.Encryption.Encrypt(txtPlain.Text);
                 byte[] IV = System.Convert.FromBase64String(CWRFiles.ReadWrite.ReadFromFile("AES_IV"));
-                MessageBox.Show(System.Convert.ToBase64String(encryptedAESText));
+                
                 txtEncryptedAES.Text = System.Convert.ToBase64String(encryptedAESText);
                 CWRFiles.CFiles.CreateFile("AES_Encrypted");
                 CWRFiles.ReadWrite.WriteToFile(System.Convert.ToBase64String(encryptedAESText), "AES_Encrypted");
@@ -208,15 +212,20 @@ namespace Cryptography
 
             
             string signatureFromFile = CWRFiles.ReadWrite.ReadFromFile("signature");
-            byte[] byteHash = System.Convert.FromBase64String(Hash);
-            byte[] byteSignature = System.Convert.FromBase64String(signatureFromFile);
-            if (signature.veritifySignature(byteHash,byteSignature))
+            if (Hash == null || signatureFromFile == null)
             {
-                MessageBox.Show("Potpis je ispravan!");
-            }
-            else
-            {
-                MessageBox.Show("Potpis nije ispravan!");
+                MessageBox.Show("Hash ili potpis ne postoje!");
+            } else {
+                byte[] byteHash = System.Convert.FromBase64String(Hash);
+                byte[] byteSignature = System.Convert.FromBase64String(signatureFromFile);
+                if (signature.veritifySignature(byteHash, byteSignature))
+                {
+                    MessageBox.Show("Potpis je ispravan!");
+                }
+                else
+                {
+                    MessageBox.Show("Potpis nije ispravan!");
+                }
             }
 
         }
